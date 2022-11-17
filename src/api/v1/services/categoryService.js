@@ -32,9 +32,11 @@ const getOneCategory = async (req) => {
 
     const result = await Category.findOne({ _id: id });
 
-    if (!result) throw new NotFoundError(`Tidak ada kategory dengan id: ${id}`);
-
-    return result;
+    if (result) {
+        return result;
+    } else {
+        throw new NotFoundError(`Tidak ada kategory dengan id: ${id}`);
+    }
 };
 
 const updateCategory = async (req) => {

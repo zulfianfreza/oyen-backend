@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const FaqService = require("../services/faqService");
+const { responseOk } = require("../utils/apiResponse");
 
 const index = async (req, res, next) => {
     const result = await FaqService.getFaq();
@@ -22,13 +23,13 @@ const create = async (req, res, next) => {
 };
 
 const find = async (req, res, next) => {
-    const result = await FaqService.getOneFaq(req);
+    try {
+        const result = await FaqService.getOneFaq(req);
 
-    res.status(StatusCodes.OK).json({
-        status_code: StatusCodes.OK,
-        message: "success",
-        data: result,
-    });
+        responseOk(res, "success", result);
+    } catch (error) {
+        next(error);
+    }
 };
 
 const update = async (req, res, next) => {
@@ -42,13 +43,13 @@ const update = async (req, res, next) => {
 };
 
 const destroy = async (req, res, next) => {
-    const result = await FaqService.deleteFaq(req);
+    try {
+        const result = await FaqService.deleteFaq(req);
 
-    res.status(StatusCodes.OK).json({
-        status_code: StatusCodes.OK,
-        message: "success",
-        data: result,
-    });
+        responseOk(res, "success", result);
+    } catch (error) {
+        next(error);
+    }
 };
 
 module.exports = { index, create, find, update, destroy };

@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const voteSchema = mongoose.Schema(
     {
+        vote: {
+            type: String,
+            enum: ["up", "down"],
+        },
         thread_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Thread",
@@ -9,10 +13,6 @@ const voteSchema = mongoose.Schema(
         user_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-        },
-        vote: {
-            type: String,
-            enum: ["up", "down"],
         },
     },
     { timestamps: true }

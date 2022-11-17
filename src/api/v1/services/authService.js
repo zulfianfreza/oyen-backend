@@ -41,6 +41,35 @@ const signinUser = async (req) => {
     return { token };
 };
 
-const signupUser = async (req) => {};
+const signupUser = async (req) => {
+    const {
+        firstname,
+        lastname,
+        email,
+        password,
+        no_telephone,
+        gender,
+        date_of_birth,
+    } = req.body;
+
+    const check = await User.findOne({ email });
+
+    if (check)
+        throw new BadRequestError(
+            "Email sudah ada, silahkan gunakan email yang lain"
+        );
+
+    const result = await User.create({
+        firstname,
+        lastname,
+        email,
+        password,
+        no_telephone,
+        gender,
+        date_of_birth,
+    });
+
+    return result;
+};
 
 module.exports = { signinAdmin, signinUser, signupUser };

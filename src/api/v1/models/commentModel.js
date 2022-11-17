@@ -1,8 +1,22 @@
 const mongoose = require("mongoose");
 
+const replySchema = mongoose.Schema(
+    {
+        text: {
+            type: String,
+            required: true,
+        },
+        user_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        },
+    },
+    { timestamps: true }
+);
+
 const commentSchema = mongoose.Schema(
     {
-        comment: {
+        text: {
             type: String,
             required: true,
         },
@@ -14,9 +28,7 @@ const commentSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
-        // pinned: {
-        //     type: Boolean,
-        // },
+        reply: [replySchema],
     },
     { timestamps: true }
 );

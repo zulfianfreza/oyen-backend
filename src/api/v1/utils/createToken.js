@@ -4,6 +4,7 @@ const createTokenAdmin = (admin) => {
         name: admin.name,
         email: admin.email,
         password: admin.password,
+        accountType: "admin",
     };
 };
 
@@ -21,6 +22,7 @@ const createTokenUser = (user) => {
         bio: user.bio,
         profilePicture: user.profile_picture,
         role: user.role,
+        accountType: "user",
     };
 };
 

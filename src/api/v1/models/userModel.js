@@ -33,15 +33,18 @@ const userSchema = mongoose.Schema(
         },
         job: {
             type: String,
+            default: "",
         },
         bio: {
             type: String,
+            default: "",
         },
         profile_picture: {
             type: String,
         },
         role: {
             type: String,
+            default: "user",
         },
     },
     { timestamps: true }
@@ -52,6 +55,9 @@ userSchema.pre("save", async function (next) {
     if (User.isModified("password")) {
         User.password = await bcrypt.hash(User.password, 12);
     }
+    User.profile_picture = `https://robohash.org/${
+        User.firstname + User.lastname
+    }.jpg?set=set4`;
     next();
 });
 

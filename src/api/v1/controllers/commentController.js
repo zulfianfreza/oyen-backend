@@ -1,8 +1,17 @@
-const { StatusCodes } = require("http-status-codes");
 const CommentService = require("../services/commentService");
 const { responseOk, responseCreated } = require("../utils/apiResponse");
 
-const add = async (req, res, next) => {
+const getComment = async (req, res, next) => {
+    try {
+        const result = await CommentService.getComment(req);
+
+        responseCreated(res, "success", result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const addComment = async (req, res, next) => {
     try {
         const result = await CommentService.addComment(req);
 
@@ -12,7 +21,17 @@ const add = async (req, res, next) => {
     }
 };
 
-const destroy = async (req, res, next) => {
+const addReply = async (req, res, next) => {
+    try {
+        const result = await CommentService.addReply(req);
+
+        responseCreated(res, "success", result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const destroyComment = async (req, res, next) => {
     try {
         const result = await CommentService.deleteComment(req);
 
@@ -22,4 +41,20 @@ const destroy = async (req, res, next) => {
     }
 };
 
-module.exports = { add, destroy };
+const destroyReply = async (req, res, next) => {
+    try {
+        const result = await CommentService.deleteReply(req);
+
+        responseOk(res, "success", result);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = {
+    addComment,
+    addReply,
+    destroyComment,
+    destroyReply,
+    getComment,
+};

@@ -20,7 +20,7 @@ const getOneFaq = async (req) => {
 
     const result = await Faq.findOne({ _id: id });
 
-    if (!result) throw new NotFoundError(`Tidak ada faq dengan id: ${id}}`);
+    if (!result) throw new NotFoundError(`Tidak ada faq dengan id: ${id}`);
 
     return result;
 };
@@ -43,7 +43,7 @@ const deleteFaq = async (req) => {
 
     const result = await Faq.findOne({ _id: id });
 
-    if (!result) throw new NotFoundError(`Tidak ada faq dengan id: ${id}}`);
+    if (!result) throw new NotFoundError(`Tidak ada faq dengan id: ${id}`);
 
     result.remove();
 

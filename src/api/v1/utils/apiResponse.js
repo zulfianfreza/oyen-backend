@@ -8,7 +8,7 @@ const responseOk = async (res, message, data) => {
     });
 };
 
-const responseAccepted = async (res, message, data) => {
+const responseAccepted = async (res, { message, data }) => {
     res.status(StatusCodes.ACCEPTED).json({
         status_code: StatusCodes.ACCEPTED,
         message,
